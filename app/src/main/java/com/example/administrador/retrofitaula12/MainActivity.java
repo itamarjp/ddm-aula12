@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,10 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+    Public Consultar (View view){
+
         Log.i("teste","iniciando...");
         //Retrofit
         Gson gson = new GsonBuilder()
@@ -33,7 +34,10 @@ public class MainActivity extends Activity {
         Log.i("teste","objeto retrofit criado...");
         ApiEndpoint apiService = retrofit.create(ApiEndpoint.class);
         Log.i("teste","chamando api...");
-        Call<UserClass> call = apiService.ObterPosts(3);
+        Integer userid = 0;
+        EditText ed = findViewById(R.id.editText);
+        userid = Integer.parseInt(ed.getText().toString());
+        Call<UserClass> call = apiService.ObterPosts(userid);
         //chamada assíncrona
         call.enqueue(new Callback<UserClass>() {
             @Override
@@ -50,5 +54,14 @@ public class MainActivity extends Activity {
                 Log.i("teste",t.toString());
             }
         });
+
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
     }
 }
