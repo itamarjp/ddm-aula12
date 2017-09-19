@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends Activity {
 
 
-    Public Consultar (View view){
+    public void Consultar (View view){
 
         Log.i("teste","iniciando...");
         //Retrofit
@@ -47,6 +48,7 @@ public class MainActivity extends Activity {
 
                 Log.i("teste","statuscode: " + statusCode);
                 Log.i("teste", "Cidade do usuário: " + user.getTitle());
+                ((TextView) (findViewById(R.id.textView))).setText(user.getTitle());
             }
             @Override
             public void onFailure(Call<UserClass> call, Throwable t) {
